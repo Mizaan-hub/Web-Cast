@@ -7,6 +7,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "WEB CAST",
   description: "Powerful Video Conference Web App",
+  icons:{
+    icon : "/icon.png" //"/public/icon.png"
+  }
 };
 
 export default function RootLayout({
