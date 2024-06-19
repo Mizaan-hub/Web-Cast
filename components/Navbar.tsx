@@ -12,10 +12,13 @@ const Navbar = () => {
         alt="Logo"
         width={32}
         height={32}
-        className="max-sm: size-10"
+        className="max-sm: size-10 mr-2"
         />
         <p className="text-[26px] font-extrabold text-white max-sm:hidden">Web Cast</p>
       </Link>
+      <div className="flex-between gap-5">
+        {/* clerk */}
+      </div>
     </nav>
   );
 };
