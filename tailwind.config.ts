@@ -26,8 +26,11 @@ const config = {
         blue: {
           1: "#0E78F9",
         },
+        sky: {
+          1: "#C9DDFF",
+        },
       },
-      backgroundImage:{
+      backgroundImage: {
         hero: "url('/images/hero-background.png')", //"/public/images/hero-background.png"
       },
       borderRadius: {
