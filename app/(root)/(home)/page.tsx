@@ -1,4 +1,5 @@
-import React from "react";
+import MeetingTypeList from "@/components/MeetingTypeList";
+// import React from "react";
 
 const Home = () => {
   const now = new Date();
@@ -7,7 +8,9 @@ const Home = () => {
     hour: "2-digit",
     minute: "2-digit",
   });
-  const date = (new Intl.DateTimeFormat('en-US', {dateStyle: "full", })).format(now);
+  const date = new Intl.DateTimeFormat("en-US", { dateStyle: "full" }).format(
+    now
+  );
 
   return (
     <section className="flex size-full flex-col gap-10 text-white">
@@ -22,6 +25,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <MeetingTypeList />
     </section>
   );
 };
