@@ -72,7 +72,7 @@ const MeetingTypeList = () => {
     }
   };
 
-  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`
+  const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.id}`;
 
   return (
     <section className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -127,32 +127,32 @@ const MeetingTypeList = () => {
             <label className="text-base text-normal leading-[22px] text-sky-2">
               Select Date and Time
             </label>
-            <ReactDatePicker 
-            selected={values.dateTime}
-            onChange={(date) => setValues({ ...values, dateTime: date! })}
-            showTimeSelect
-            timeIntervals={15}
-            timeFormat="HH:mm"
-            timeCaption="Time"
-            dateFormat="MMMM d, yyyy h:mm aa"
-            className="w-full border-none bg-dark-3 rounded p-2 focus-outline-none"
+            <ReactDatePicker
+              selected={values.dateTime}
+              onChange={(date) => setValues({ ...values, dateTime: date! })}
+              showTimeSelect
+              timeIntervals={15}
+              timeFormat="HH:mm"
+              timeCaption="Time"
+              dateFormat="MMMM d, yyyy h:mm aa"
+              className="w-full border-none bg-dark-3 rounded p-2 focus-outline-none"
             />
           </div>
         </MeetingModal>
       ) : (
         <MeetingModal
-        isOpen={meetingState === "isScheduleMeeting"}
-        onClose={() => setMeetingState(undefined)}
-        title="Meeting Created"
-        className="text-center"
-        handleClick={() => {
-          navigator.clipboard.writeText(meetingLink);
-          toast({title : "Link copied"})
-        }}
-        image="/icons/checked.svg" //"/public/icons/checked.svg"
-        buttonIcon="/icons/copy.svg" //"/public/icons/copy.svg"
-        buttonText="Copy Meeting Link"
-      />
+          isOpen={meetingState === "isScheduleMeeting"}
+          onClose={() => setMeetingState(undefined)}
+          title="Meeting Created"
+          className="text-center"
+          handleClick={() => {
+            navigator.clipboard.writeText(meetingLink);
+            toast({ title: "Link copied" });
+          }}
+          image="/icons/checked.svg" //"/public/icons/checked.svg"
+          buttonIcon="/icons/copy.svg" //"/public/icons/copy.svg"
+          buttonText="Copy Meeting Link"
+        />
       )}
 
       <MeetingModal
