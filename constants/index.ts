@@ -25,3 +25,8 @@ export const sidebarLinks = [
     imgURL: "/icons/add-personal.svg", //"/public/icons/add-personal.svg"
   },
 ];
+
+export const avatarImages = [
+  '/images/avatar-1.jpeg', //"/public/images/avatar-1.jpeg"
+  '/images/avatar-2.jpeg', //"/public/images/avatar-2.jpeg"
+];
