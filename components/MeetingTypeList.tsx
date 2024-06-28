@@ -8,6 +8,7 @@ import { useState } from "react";
 import MeetingModal from "./MeetingModal";
 import { useUser } from "@clerk/nextjs";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
+import { Textarea } from "./ui/textarea";
 
 const MeetingTypeList = () => {
   const router = useRouter();
@@ -80,17 +81,17 @@ const MeetingTypeList = () => {
         className="bg-orange-1"
       />
       <HomeCard
-        img="/icons/join-meeting.svg" //"/public/icons/join-meeting.svg"
-        title="Join Meeting"
-        description="Via invitation link"
-        handleClick={() => setMeetingState("isJoiningMeeting")}
-        className="bg-blue-1"
-      />
-      <HomeCard
         img="/icons/schedule.svg" //"/public/icons/schedule.svg"
         title="Schedule Meeting"
         description="Plan your meeting"
         handleClick={() => setMeetingState("isScheduleMeeting")}
+        className="bg-blue-1"
+      />
+      <HomeCard
+        img="/icons/join-meeting.svg" //"/public/icons/join-meeting.svg"
+        title="Join Meeting"
+        description="Via invitation link"
+        handleClick={() => setMeetingState("isJoiningMeeting")}
         className="bg-purple-1"
       />
       <HomeCard
@@ -107,7 +108,19 @@ const MeetingTypeList = () => {
           onClose={() => setMeetingState(undefined)}
           title="Create Meeting"
           handleClick={createMeeting}
-        />
+        >
+          <div className="flex flex-col gap-2.5">
+            <label className="text-base text-normal leading-[22px] text-sky-2">
+              Add a description
+            </label>
+            <Textarea
+              className="border-none bg-dark-3 focus-visible:ring-offset-0"
+              onChange={(e) =>
+                setValues({ ...values, description: e.target.value })
+              }
+            />
+          </div>
+        </MeetingModal>
       ) : (
         <MeetingModal
           isOpen={meetingState === "isScheduleMeeting"}
