@@ -16,19 +16,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 import React, { useState } from "react";
 import { LayoutList, Users } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import EndCallButton from "./EndCallButton";
 
-type CallLayoutType = 'grid' | 'speaker_right' | 'speaker_left';
+type CallLayoutType = "grid" | "speaker_left" | "speaker_right";
 
 const MeetingRoom = () => {
-  const [layout, setLayout] = useState<CallLayoutType>('speaker_left');
+  const searchParams = useSearchParams();
+  const isPersonalRoom = !!searchParams.get("personal");
+  const [layout, setLayout] = useState<CallLayoutType>("speaker_left");
 
   const [showParticipants, setShowParticipants] = useState(false);
 
   const CallLayout = () => {
     switch (layout) {
-      case 'grid':
+      case "grid":
         return <PaginatedGridLayout />;
-      case 'speaker_right':
+      case "speaker_right":
         return <SpeakerLayout participantsBarPosition="left" />;
       default:
         return <SpeakerLayout participantsBarPosition="right" />;
@@ -59,7 +63,7 @@ const MeetingRoom = () => {
             </DropdownMenuTrigger>
           </div>
           <DropdownMenuContent className="border-dark-1 bg-dark-1 text-white">
-            {['Grid', 'Speaker-Left', 'Speaker-Right'].map((item, index) => (
+            {["Grid", "Speaker-Left", "Speaker-Right"].map((item, index) => (
               <div key={index}>
                 <DropdownMenuItem
                   className="cursor-pointer"
@@ -80,9 +84,10 @@ const MeetingRoom = () => {
           title="button"
         >
           <div className="curser-pointer rounded-2xl bg-[#19232d] px-4 py-2 hover:bg-[#4c535b]">
-            <Users size={20} className="text-white"/>
+            <Users size={20} className="text-white" />
           </div>
         </button>
+        {!isPersonalRoom && <EndCallButton />}
       </div>
     </section>
   );
