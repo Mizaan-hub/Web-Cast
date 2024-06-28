@@ -24,6 +24,7 @@ interface MeetingModalProps {
 }
 
 const MeetingModal = ({
+  isOpen,
   onClose,
   title,
   className,
