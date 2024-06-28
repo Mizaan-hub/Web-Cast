@@ -9,6 +9,7 @@ import MeetingModal from "./MeetingModal";
 import { useUser } from "@clerk/nextjs";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
 import { Textarea } from "./ui/textarea";
+import ReactDatePicker from "react-datepicker";
 
 const MeetingTypeList = () => {
   const router = useRouter();
@@ -120,20 +121,19 @@ const MeetingTypeList = () => {
               }
             />
           </div>
+          <div className="flex flex-col w-full gap-2.5">
+            <label className="text-base text-normal leading-[22px] text-sky-2">
+              Select Date and Time
+            </label>
+            <ReactDatePicker 
+            selected={values.dateTime}
+            onChange={(date) => setValues({ ...values, dateTime: date! })}
+            />
+          </div>
         </MeetingModal>
       ) : (
         <MeetingModal
-          isOpen={meetingState === "isScheduleMeeting"}
-          onClose={() => setMeetingState(undefined)}
-          title="Start an Instant Meeting"
-          className="text-center"
-          buttonText="Start Meeting"
-          handleClick={createMeeting}
-        />
-      )}
-
-      <MeetingModal
-        isOpen={meetingState === "isInstantMeeting"}
+        isOpen={meetingState === "isScheduleMeeting"}
         onClose={() => setMeetingState(undefined)}
         title="Meeting Created"
         className="text-center"
@@ -144,6 +144,16 @@ const MeetingTypeList = () => {
         image="/icons/checked.svg" //"/public/icons/checked.svg"
         buttonIcon="/icons/copy.svg" //"/public/icons/copy.svg"
         buttonText="Copy Meeting Link"
+      />
+      )}
+
+      <MeetingModal
+        isOpen={meetingState === "isInstantMeeting"}
+        onClose={() => setMeetingState(undefined)}
+        title="Start an Instant Meeting"
+        className="text-center"
+        buttonText="Start Meeting"
+        handleClick={createMeeting}
       />
     </section>
   );
