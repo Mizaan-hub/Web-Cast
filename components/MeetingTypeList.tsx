@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import HomeCard from "./HomeCard";
+import { useToast } from "@/components/ui/use-toast";
 
 import { useState } from "react";
 import MeetingModal from "./MeetingModal";
@@ -22,7 +23,8 @@ const MeetingTypeList = () => {
     link: "",
   });
 
-  const [callDetail, setCallDetail] = useState<Call>();
+  const [callDetails, setCallDetails] = useState<Call>();
+  const { toast } = useToast();
 
   const createMeeting = async () => {
     if (!client || !user) return;
@@ -30,6 +32,11 @@ const MeetingTypeList = () => {
     try {
       const id = crypto.randomUUID();
       const call = client.call("default", id);
+
+      if (!values.dateTime) {
+        toast({ title: "Please select a date and time" });
+        return
+      }
 
       if (!call) throw new Error("Failed to create call");
 
@@ -46,13 +53,20 @@ const MeetingTypeList = () => {
         },
       });
 
-      setCallDetail(call);
+      setCallDetails(call);
 
-      if(!values.description){
-        router.push(`/meeting/${call.id}`)
+      if (!values.description) {
+        router.push(`/meeting/${call.id}`);
       }
+
+      toast({
+        title: "Meeting Created",
+      })
     } catch (error) {
       console.log(error);
+      toast({
+        title: "failed to Create Meeting",
+      });
     }
   };
 
