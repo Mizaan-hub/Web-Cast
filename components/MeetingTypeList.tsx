@@ -35,7 +35,7 @@ const MeetingTypeList = () => {
 
       if (!values.dateTime) {
         toast({ title: "Please select a date and time" });
-        return
+        return;
       }
 
       if (!call) throw new Error("Failed to create call");
@@ -61,7 +61,7 @@ const MeetingTypeList = () => {
 
       toast({
         title: "Meeting Created",
-      })
+      });
     } catch (error) {
       console.log(error);
       toast({
@@ -101,13 +101,36 @@ const MeetingTypeList = () => {
         className="bg-yellow-1"
       />
 
+      {!callDetails ? (
+        <MeetingModal
+          isOpen={meetingState === "isScheduleMeeting"}
+          onClose={() => setMeetingState(undefined)}
+          title="Create Meeting"
+          handleClick={createMeeting}
+        />
+      ) : (
+        <MeetingModal
+          isOpen={meetingState === "isScheduleMeeting"}
+          onClose={() => setMeetingState(undefined)}
+          title="Start an Instant Meeting"
+          className="text-center"
+          buttonText="Start Meeting"
+          handleClick={createMeeting}
+        />
+      )}
+
       <MeetingModal
         isOpen={meetingState === "isInstantMeeting"}
         onClose={() => setMeetingState(undefined)}
-        title="Start an Instant Meeting"
+        title="Meeting Created"
         className="text-center"
-        buttonText="Start Meeting"
-        handleClick={createMeeting}
+        handleClick={() => {
+          // navigator.clipboard.writeText(meetingLink);
+          // toast({title : "Link copied"})
+        }}
+        image="/icons/checked.svg" //"/public/icons/checked.svg"
+        buttonIcon="/icons/copy.svg" //"/public/icons/copy.svg"
+        buttonText="Copy Meeting Link"
       />
     </section>
   );
