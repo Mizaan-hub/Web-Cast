@@ -39,7 +39,7 @@
 }
 
 .str-video__call-controls__button {
-  height: 40px;
+  height: fit-content;
 }
 
 .glassmorphism {
