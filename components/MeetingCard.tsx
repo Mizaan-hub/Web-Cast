@@ -1,9 +1,11 @@
-import { avatarImages } from "@/constants";
-import { cn } from "@/lib/utils";
+"use client";
+
 import Image from "next/image";
-import React from "react";
+
+import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
-import { toast } from "./ui/use-toast";
+import { avatarImages } from "@/constants";
+import { useToast } from "./ui/use-toast";
 
 interface MeetingCardProps {
   title: string;
@@ -22,18 +24,20 @@ const MeetingCard = ({
   date,
   isPreviousMeeting,
   buttonIcon1,
-  buttonText,
   handleClick,
   link,
+  buttonText,
 }: MeetingCardProps) => {
+  const { toast } = useToast();
+
   return (
-    <section className="flex flex-col min-h-[250px] w-full justify-between rounded-[14px] bg-dark-1 px-5 py-8 xl:max-w-[568px]">
+    <section className="flex min-h-[258px] w-full flex-col justify-between rounded-[14px] bg-dark-1 px-5 py-8 xl:max-w-[568px]">
       <article className="flex flex-col gap-5">
         <Image src={icon} alt="upcoming" width={28} height={28} />
         <div className="flex justify-between">
           <div className="flex flex-col gap-2">
-            <h1 className="font-bold text-2xl">{title}</h1>
-            <h1 className="text-base font-normal">{date}</h1>
+            <h1 className="text-2xl font-bold">{title}</h1>
+            <p className="text-base font-normal">{date}</p>
           </div>
         </div>
       </article>
@@ -58,9 +62,9 @@ const MeetingCard = ({
           <div className="flex gap-2">
             <Button onClick={handleClick} className="rounded bg-blue-1 px-6">
               {buttonIcon1 && (
-                <Image src={buttonIcon1} alt="button" width={20} height={20} />
+                <Image src={buttonIcon1} alt="feature" width={20} height={20} />
               )}
-              {buttonText}
+              &nbsp; {buttonText}
             </Button>
             <Button
               onClick={() => {
